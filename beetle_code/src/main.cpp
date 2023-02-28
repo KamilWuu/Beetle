@@ -1,6 +1,5 @@
 #include "setup.h"
 
-
 int main(void)
 {
   /////////Arduino stuff//////////
@@ -9,46 +8,46 @@ int main(void)
   USBDevice.attach();
 #endif
   ////////////////////////////////
-    //setup() here:
-	
-//pinModes:
-//----LEDS----//
-pinMode(LED_RED, OUTPUT);
-pinMode(LED_BLUE, OUTPUT);
+  // setup() here:
 
-//----MOTORS----//
-pinMode(MOTOR_LEFT_1, OUTPUT);
-pinMode(MOTOR_LEFT_2, OUTPUT);
-pinMode(MOTOR_RIGHT_1, OUTPUT);
-pinMode(MOTOR_RIGHT_2, OUTPUT);
+  // pinModes:
+  //----LEDS----//
+  pinMode(LED_RED, OUTPUT);
+  pinMode(LED_BLUE, OUTPUT);
 
-//----SERVOS----//
-pinMode(SERVO_LEFT, OUTPUT);
-pinMode(SERVO_RIGHT, OUTPUT);
+  //----MOTORS----//
+  pinMode(MOTOR_LEFT_1, OUTPUT);
+  pinMode(MOTOR_LEFT_2, OUTPUT);
+  pinMode(MOTOR_RIGHT_1, OUTPUT);
+  pinMode(MOTOR_RIGHT_2, OUTPUT);
 
-//----TOF_SENSORS_PINS----//
-pinMode(TOF_PIN_1, OUTPUT);
-pinMode(TOF_PIN_2, OUTPUT);
-pinMode(TOF_PIN_3, OUTPUT);
-pinMode(TOF_PIN_4, OUTPUT);
+  //----SERVOS----//
+  pinMode(SERVO_LEFT, OUTPUT);
+  pinMode(SERVO_RIGHT, OUTPUT);
 
-//----GROUND_SENSORS----//
-pinMode(GROUND_SENSOR_LEFT, INPUT);
-pinMode(GROUND_SENSOR_RIGHT, INPUT);
+  //----TOF_SENSORS_PINS----//
+  pinMode(TOF_PIN_1, OUTPUT);
+  pinMode(TOF_PIN_2, OUTPUT);
+  pinMode(TOF_PIN_3, OUTPUT);
+  pinMode(TOF_PIN_4, OUTPUT);
 
-//----SWITCHES----//
-pinMode(SWITCH_2, INPUT);
-pinMode(SWITCH_3, INPUT);
+  //----GROUND_SENSORS----//
+  pinMode(GROUND_SENSOR_LEFT, INPUT);
+  pinMode(GROUND_SENSOR_RIGHT, INPUT);
 
-//----VOLTAGE_MEASUREMENT----//
-pinMode(VOLTAGE, INPUT);
+  //----SWITCHES----//
+  pinMode(SWITCH_2, INPUT);
+  pinMode(SWITCH_3, INPUT);
 
-//----STARTER----//
-pinMode(STARTER, INPUT);
+  //----VOLTAGE_MEASUREMENT----//
+  pinMode(VOLTAGE, INPUT);
+
+  //----STARTER----//
+  pinMode(STARTER, INPUT);
 
   for (;;)
   { // void loop() equivalent
-    
+
     digitalWrite(LED_RED, HIGH);
     delay(100);
     digitalWrite(LED_RED, LOW);
