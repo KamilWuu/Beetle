@@ -46,11 +46,13 @@ pinMode(VOLTAGE, INPUT);
 //----STARTER----//
 pinMode(STARTER, INPUT);
 
-
   for (;;)
   { // void loop() equivalent
     
-
+    digitalWrite(LED_RED, HIGH);
+    delay(100);
+    digitalWrite(LED_RED, LOW);
+    delay(100);
     ////////////Arduino stuff/////////////
     if (serialEventRun)
       serialEventRun();
