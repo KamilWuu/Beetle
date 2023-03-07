@@ -1,0 +1,35 @@
+
+
+#include <Arduino.h>
+
+
+//PB5 dioda czerwona sck
+//PB4 dioda niebeiska miso
+
+void setup()
+{
+DDRB = B00110000;
+
+}
+
+void loop() {
+                    //B0000 0000
+
+PORTB |= B00100000; //B0010 0000
+_delay_ms(500);
+PORTB |= B00010000; //B0011 0000
+_delay_ms(500);
+PORTB &= B11101111; //B0010 0000
+_delay_ms(500);
+PORTB &= B11011111; //B0000 0000
+_delay_ms(1000);
+
+PORTB |= B00100000;
+_delay_ms(500);
+PORTB |= B00010000;
+_delay_ms(500);
+PORTB &= B11011111;
+_delay_ms(500);
+PORTB &= B11101111;
+_delay_ms(1000);
+}

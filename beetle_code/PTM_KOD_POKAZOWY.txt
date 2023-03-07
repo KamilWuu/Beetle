@@ -1,0 +1,67 @@
+
+
+#include <Arduino.h>
+#define time 120
+
+uint8_t switch_state_1 = 1;
+uint8_t switch_state_2 = 1;
+
+void setup()
+{
+DDRB = B00111100;
+DDRD = B00101000;
+
+}
+
+void loop(){
+
+switch_state_1 = PINC;
+switch_state_1 = switch_state_1 & B00000001;
+
+switch_state_2 = PINC;
+switch_state_2 = switch_state_2 & B00000010;
+
+if(switch_state_2 == 0)
+{
+    PORTB |= B00000100;
+    PORTD |= B00100000;
+}
+else
+{
+    PORTB &= B11111011;
+    PORTD &= B11011111;
+}
+
+if(switch_state_1 == 0)
+{
+PORTB |= B00100000;     //LED_RED_HIGH
+_delay_ms(time);
+PORTB |= B00010000;     //LED_BLUE1_HIGH
+_delay_ms(time);
+PORTB &= B11011111;     //LED_RED_LOW
+PORTB |= B00001000;     //LED_BLUE2_HIGH
+_delay_ms(time);
+PORTB &= B11101111;     //LED_BLUE1_LOW
+PORTD |= B00001000;     //LED_WHITE_HIGH    
+_delay_ms(time);
+PORTB &= B11110111;     //LED_BLUE2_LOW
+_delay_ms(time);
+PORTD &= B11110111;     //LED_WHITE_LOW
+_delay_ms(time + 100);
+}
+
+}
+
+//PRZESUNIECIA BITOWE
+
+/*
+PORTB |= B00001000;
+_delay_ms(time);
+PORTB <<= 1;
+_delay_ms(time);
+PORTB <<= 1;
+_delay_ms(time);
+PORTB &= B00000000;
+_delay_ms(time + 160);
+*/
+

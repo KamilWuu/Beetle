@@ -1,61 +1,55 @@
+#include <Arduino.h>
 #include "setup.h"
+#include "tof.h"
 
-int main(void)
-{
-  /////////Arduino stuff//////////
-  init();
-#if defined(USBCON)
-  USBDevice.attach();
-#endif
-  ////////////////////////////////
-  // setup() here:
 
+int *tablica;
+
+void setup() {
   // pinModes:
-  //----LEDS----//
-  pinMode(LED_RED, OUTPUT);
-  pinMode(LED_BLUE, OUTPUT);
+   //----LEDS----//
+   pinMode(LED_RED, OUTPUT);
+   pinMode(LED_BLUE, OUTPUT);
 
-  //----MOTORS----//
-  pinMode(MOTOR_LEFT_1, OUTPUT);
-  pinMode(MOTOR_LEFT_2, OUTPUT);
-  pinMode(MOTOR_RIGHT_1, OUTPUT);
-  pinMode(MOTOR_RIGHT_2, OUTPUT);
+   //----MOTORS----//
+   pinMode(MOTOR_LEFT_1, OUTPUT);
+   pinMode(MOTOR_LEFT_2, OUTPUT);
+   pinMode(MOTOR_RIGHT_1, OUTPUT);
+   pinMode(MOTOR_RIGHT_2, OUTPUT);
 
-  //----SERVOS----//
-  pinMode(SERVO_LEFT, OUTPUT);
-  pinMode(SERVO_RIGHT, OUTPUT);
+   //----SERVOS----//
+   pinMode(SERVO_LEFT, OUTPUT);
+   pinMode(SERVO_RIGHT, OUTPUT);
 
-  //----TOF_SENSORS_PINS----//
-  pinMode(TOF_PIN_1, OUTPUT);
-  pinMode(TOF_PIN_2, OUTPUT);
-  pinMode(TOF_PIN_3, OUTPUT);
-  pinMode(TOF_PIN_4, OUTPUT);
+   //----TOF_SENSORS_PINS----//
+   pinMode(XSHUT_TOF_1, OUTPUT);
+   pinMode(XSHUT_TOF_2, OUTPUT);
+   pinMode(XSHUT_TOF_3, OUTPUT);
+   pinMode(XSHUT_TOF_4, OUTPUT);
 
-  //----GROUND_SENSORS----//
+   //----GROUND_SENSORS----//
   pinMode(GROUND_SENSOR_LEFT, INPUT);
-  pinMode(GROUND_SENSOR_RIGHT, INPUT);
+   pinMode(GROUND_SENSOR_RIGHT, INPUT);
 
-  //----SWITCHES----//
-  pinMode(SWITCH_2, INPUT);
-  pinMode(SWITCH_3, INPUT);
+   //----SWITCHES----//
+   pinMode(SWITCH_1, INPUT);
+   pinMode(SWITCH_2, INPUT);
 
-  //----VOLTAGE_MEASUREMENT----//
-  pinMode(VOLTAGE, INPUT);
+   //----VOLTAGE_MEASUREMENT----//
+   pinMode(VOLTAGE, INPUT);
 
-  //----STARTER----//
-  pinMode(STARTER, INPUT);
+   //----STARTER----//
+   pinMode(STARTER, INPUT);
 
-  for (;;)
-  { // void loop() equivalent
 
-    digitalWrite(LED_RED, HIGH);
-    delay(100);
-    digitalWrite(LED_RED, LOW);
-    delay(100);
-    ////////////Arduino stuff/////////////
-    if (serialEventRun)
-      serialEventRun();
-    //////////////////////////////////////
-  }
-  return 0;
+  setID();
+ 
+}
+
+void loop() {
+
+  tablica = read_four_sensors();                //< -- do tego mozna sie odnosić jak do normalnej tablicy
+  delay(100);
+
+
 }
