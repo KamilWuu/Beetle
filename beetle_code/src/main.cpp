@@ -5,7 +5,6 @@
 
 
 
-
 int main(void)
 {
   /////////Arduino stuff//////////
@@ -15,15 +14,14 @@ int main(void)
 #endif
   ////////////////////////////////
   //SETUP
-  uint16_t tablica[4];
-  
+  uint16_t pomiary[4];
+  Wire.begin();
+  setID();
+
   for (;;)
-  { //LOOP
-
-  readFourSensors(tablica);
-  sensorsTest(tablica);
-    
-
+  { 
+    readFourSensors(pomiary);
+    sensorsTest(pomiary);
     delay(1);
     ////////////Arduino stuff/////////////
     if (serialEventRun)

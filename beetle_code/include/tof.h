@@ -19,8 +19,8 @@
 //#define HIGH_ACCURACY
 
 
-#define DIST 400
-#define TIMING_BUDGET 20000
+#define DIST 200
+#define TIMING_BUDGET 50
 
 
 void setID();

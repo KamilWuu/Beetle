@@ -1,0 +1,188 @@
+
+#include <Arduino.h>
+#include "Wire.h"
+#include <VL53L0X.h>
+#include "setup.h"
+
+// DEFINE ADRESSES
+#define TOF_1_ADDRESS 0x30 // LOX1_ADDRESS
+#define TOF_2_ADDRESS 0x32
+#define TOF_3_ADDRESS 0x34
+#define TOF_4_ADDRESS 0x36
+
+#define XSHUT_TOF_1 8
+#define XSHUT_TOF_2 7
+#define XSHUT_TOF_3 4
+#define XSHUT_TOF_4 2
+
+#define HIGH_SPEED
+#define DIST 200
+//#define HIGH_ACCURACY
+
+int main(void)
+{
+  /////////Arduino stuff//////////
+  init();
+#if defined(USBCON)
+  USBDevice.attach();
+#endif
+  ////////////////////////////////
+  //SETUP
+  VL53L0X tof1;
+  VL53L0X tof2;
+  VL53L0X tof3;
+  VL53L0X tof4;
+  int pomiary[4];
+  
+
+  pinMode(XSHUT_TOF_1,OUTPUT);
+  pinMode(XSHUT_TOF_2,OUTPUT);
+  pinMode(XSHUT_TOF_3,OUTPUT);
+  pinMode(XSHUT_TOF_4,OUTPUT);
+
+  pinMode(LED_BLUE, OUTPUT);
+  pinMode(LED_BLUE, OUTPUT);
+  pinMode(SERVO_LEFT, OUTPUT);
+  pinMode(SERVO_RIGHT, OUTPUT);
+
+  Wire.begin();
+
+
+  digitalWrite(XSHUT_TOF_1,LOW);
+  digitalWrite(XSHUT_TOF_2,LOW);
+  digitalWrite(XSHUT_TOF_3,LOW);
+  digitalWrite(XSHUT_TOF_4,LOW);
+
+  delay(10);
+
+  digitalWrite(XSHUT_TOF_1,HIGH);
+  digitalWrite(XSHUT_TOF_2,LOW);
+  digitalWrite(XSHUT_TOF_3,LOW);
+  digitalWrite(XSHUT_TOF_4,LOW);
+
+  tof1.setTimeout(500);
+  tof1.setAddress(TOF_1_ADDRESS);
+  tof1.init();
+  delay(10);
+
+  
+  digitalWrite(XSHUT_TOF_2,HIGH);
+  digitalWrite(XSHUT_TOF_3,LOW);
+  digitalWrite(XSHUT_TOF_4,LOW);
+
+  tof2.setTimeout(500); 
+  tof2.setAddress(TOF_2_ADDRESS);
+  tof2.init();
+  delay(10);
+
+
+  digitalWrite(XSHUT_TOF_3,HIGH);
+  digitalWrite(XSHUT_TOF_4,LOW);
+
+  tof3.setTimeout(500);
+  tof3.setAddress(TOF_3_ADDRESS);
+  tof3.init();
+  delay(10);
+
+
+  digitalWrite(XSHUT_TOF_4,HIGH);
+
+  tof4.setTimeout(500);
+  tof4.setAddress(TOF_4_ADDRESS);
+  tof4.init();
+  delay(10);
+
+  digitalWrite(XSHUT_TOF_1,HIGH);
+  digitalWrite(XSHUT_TOF_2,HIGH);
+  digitalWrite(XSHUT_TOF_3,HIGH);
+  digitalWrite(XSHUT_TOF_4,HIGH);
+
+
+  #if defined LONG_RANGE
+  // lower the return signal rate limit (default is 0.25 MCPS)
+  tof1.setSignalRateLimit(0.1);
+  tof2.setSignalRateLimit(0.1);
+  tof3.setSignalRateLimit(0.1);
+  tof4.setSignalRateLimit(0.1);
+  // increase laser pulse periods (defaults are 14 and 10 PCLKs)
+  tof1.setVcselPulsePeriod(VL53L0X::VcselPeriodPreRange, 18);
+  tof2.setVcselPulsePeriod(VL53L0X::VcselPeriodPreRange, 18);
+  tof3.setVcselPulsePeriod(VL53L0X::VcselPeriodPreRange, 18);
+  tof4.setVcselPulsePeriod(VL53L0X::VcselPeriodPreRange, 18);
+
+  tof1.setVcselPulsePeriod(VL53L0X::VcselPeriodFinalRange, 14);
+  tof2.setVcselPulsePeriod(VL53L0X::VcselPeriodFinalRange, 14);
+  tof3.setVcselPulsePeriod(VL53L0X::VcselPeriodFinalRange, 14);
+  tof4.setVcselPulsePeriod(VL53L0X::VcselPeriodFinalRange, 14);
+#endif
+
+#if defined HIGH_SPEED
+  // reduce timing budget to 20 ms (default is about 33 ms)
+  tof1.setMeasurementTimingBudget(15000);
+  tof2.setMeasurementTimingBudget(15000);
+  tof3.setMeasurementTimingBudget(15000);
+  tof4.setMeasurementTimingBudget(15000);
+#elif defined HIGH_ACCURACY
+  // increase timing budget to 200 ms
+  tof1.setMeasurementTimingBudget(200000);
+  tof2.setMeasurementTimingBudget(200000);
+  tof3.setMeasurementTimingBudget(200000);
+  tof4.setMeasurementTimingBudget(200000);
+#endif
+
+
+
+  for (;;)
+  { //LOOP
+
+    pomiary[0] = 3333;
+    pomiary[1] = tof2.readRangeSingleMillimeters();
+    pomiary[2] = tof3.readRangeSingleMillimeters();
+    pomiary[3] = tof4.readRangeSingleMillimeters();
+
+    if(pomiary[0] < DIST)
+    {
+      digitalWrite(LED_RED,HIGH);
+    }
+    else
+    {
+      digitalWrite(LED_RED,LOW);
+    }
+
+
+    if(pomiary[1] < DIST)
+    {
+      digitalWrite(LED_BLUE,HIGH);
+    }
+    else
+    {
+      digitalWrite(LED_BLUE,LOW);
+    }
+
+    if(pomiary[2] < DIST)
+    {
+      digitalWrite(SERVO_LEFT,HIGH);
+    }
+    else
+    {
+      digitalWrite(SERVO_LEFT,LOW);
+    }
+
+    if(pomiary[3] < DIST)
+    {
+      digitalWrite(SERVO_RIGHT,HIGH);
+    }
+    else
+    {
+      digitalWrite(SERVO_RIGHT,LOW);
+    }
+
+
+    delay(1);
+    ////////////Arduino stuff/////////////
+    if (serialEventRun)
+      serialEventRun();
+    //////////////////////////////////////
+  }
+  return 0;
+}

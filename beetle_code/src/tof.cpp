@@ -13,7 +13,7 @@ void setID()
   pinMode(XSHUT_TOF_3,OUTPUT);
   pinMode(XSHUT_TOF_4,OUTPUT);
 
-  Wire.begin();
+  
 
 
   digitalWrite(XSHUT_TOF_1,LOW);
@@ -95,6 +95,11 @@ void readFourSensors(uint16_t *tab)
 
 void sensorsTest(uint16_t *tab)
 {
+  pinMode(13,OUTPUT);
+  pinMode(12,OUTPUT);
+  pinMode(11,OUTPUT);
+  pinMode(3,OUTPUT);
+
   if(tab[0] < DIST)
     {
       digitalWrite(13,HIGH); //RED
