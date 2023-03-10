@@ -1,21 +1,9 @@
 #include "tof.h"
-VL53L0X tof1;
-VL53L0X tof2;
-VL53L0X tof3;
-VL53L0X tof4;
-  
 
 
-void setID()
+
+void tof::setID()
 {
-  pinMode(XSHUT_TOF_1,OUTPUT);
-  pinMode(XSHUT_TOF_2,OUTPUT);
-  pinMode(XSHUT_TOF_3,OUTPUT);
-  pinMode(XSHUT_TOF_4,OUTPUT);
-
-  
-
-
   digitalWrite(XSHUT_TOF_1,LOW);
   digitalWrite(XSHUT_TOF_2,LOW);
   digitalWrite(XSHUT_TOF_3,LOW);
@@ -27,10 +15,10 @@ void setID()
   digitalWrite(XSHUT_TOF_2,LOW);
   digitalWrite(XSHUT_TOF_3,LOW);
   digitalWrite(XSHUT_TOF_4,LOW);
-
-  tof1.setTimeout(500);
-  tof1.setAddress(TOF_1_ADDRESS);
-  tof1.init();
+  //this->tofTab[] wszedzie
+  tofTab[0].setTimeout(TIMEOUT_VALUE);
+  tofTab[0].setAddress(TOF_1_ADDRESS);
+  tofTab[0].init();
   delay(10);
 
   
@@ -38,45 +26,43 @@ void setID()
   digitalWrite(XSHUT_TOF_3,LOW);
   digitalWrite(XSHUT_TOF_4,LOW);
 
-  tof2.setTimeout(500); 
-  tof2.setAddress(TOF_2_ADDRESS);
-  tof2.init();
+  tofTab[1].setTimeout(TIMEOUT_VALUE); 
+  tofTab[1].setAddress(TOF_2_ADDRESS);
+  tofTab[1].init();
   delay(10);
 
 
   digitalWrite(XSHUT_TOF_3,HIGH);
   digitalWrite(XSHUT_TOF_4,LOW);
 
-  tof3.setTimeout(500);
-  tof3.setAddress(TOF_3_ADDRESS);
-  tof3.init();
+  tofTab[2].setTimeout(TIMEOUT_VALUE);
+  tofTab[2].setAddress(TOF_3_ADDRESS);
+  tofTab[2].init();
   delay(10);
 
 
   digitalWrite(XSHUT_TOF_4,HIGH);
 
-  tof4.setTimeout(500);
-  tof4.setAddress(TOF_4_ADDRESS);
-  tof4.init();
+  tofTab[3].setTimeout(TIMEOUT_VALUE);
+  tofTab[3].setAddress(TOF_4_ADDRESS);
+  tofTab[3].init();
   delay(10);
 
-  digitalWrite(XSHUT_TOF_1,HIGH);
-  digitalWrite(XSHUT_TOF_2,HIGH);
-  digitalWrite(XSHUT_TOF_3,HIGH);
-  digitalWrite(XSHUT_TOF_4,HIGH);
 
 #if defined HIGH_SPEED
   // reduce timing budget to 20 ms (default is about 33 ms)
-  tof1.setMeasurementTimingBudget(TIMING_BUDGET);
-  tof2.setMeasurementTimingBudget(TIMING_BUDGET);
-  tof3.setMeasurementTimingBudget(TIMING_BUDGET);
-  tof4.setMeasurementTimingBudget(TIMING_BUDGET);
+  for(int i = 0; i < 4; i++)
+  {
+    this->tofTab[i].setMeasurementTimingBudget(TIMING_BUDGET);
+  }
+  
+  
 #elif defined HIGH_ACCURACY
   // increase timing budget to 200 ms
-  tof1.setMeasurementTimingBudget(200000);
-  tof2.setMeasurementTimingBudget(200000);
-  tof3.setMeasurementTimingBudget(200000);
-  tof4.setMeasurementTimingBudget(200000);
+  for(int i = 0; i < 4; i++)
+  {
+    tofTab[i].setMeasurementTimingBudget(200000);
+  }
 #endif
 
 
@@ -84,21 +70,18 @@ void setID()
 }
 
 
-void readFourSensors(uint16_t *tab)
+void tof::readFourSensors(uint16_t *tab)
 {
-    tab[0] = 3333;
-    tab[1] = tof2.readRangeSingleMillimeters();
-    tab[2] = tof3.readRangeSingleMillimeters();
-    tab[3] = tof4.readRangeSingleMillimeters();
+    for(int i = 0; i < 4; i++)
+    {
+      tab[i] = this->tofTab[i].readRangeSingleMillimeters();
+    }
+    tab[0] = ZERO_DISTANCE;
 }
 
 
-void sensorsTest(uint16_t *tab)
+void tof::tofTest(uint16_t *tab)
 {
-  pinMode(13,OUTPUT);
-  pinMode(12,OUTPUT);
-  pinMode(11,OUTPUT);
-  pinMode(3,OUTPUT);
 
   if(tab[0] < DIST)
     {

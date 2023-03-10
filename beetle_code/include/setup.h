@@ -17,6 +17,12 @@
 #define SERVO_LEFT 11
 #define SERVO_RIGHT 3
 
+//----TOF_XSHUTS----//
+#define XSHUT_TOF_1 8
+#define XSHUT_TOF_2 7
+#define XSHUT_TOF_3 4
+#define XSHUT_TOF_4 2
+
 //----GROUND_SENSORS----//
 #define GROUND_SENSOR_LEFT A7
 #define GROUND_SENSOR_RIGHT A6
@@ -32,3 +38,7 @@
 #define STARTER A3
 
 
+
+#define MIN_VOLTAGE 780 // x = 7,5 (minimal) * 10/20,,, 1023*x/5 = 770
+
+void pinModes();

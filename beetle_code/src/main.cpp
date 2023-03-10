@@ -1,7 +1,9 @@
 
 #include <Arduino.h>
-#include "setup.h"
+#include "state.h"
 #include "tof.h"
+
+
 
 
 
@@ -14,14 +16,35 @@ int main(void)
 #endif
   ////////////////////////////////
   //SETUP
-  uint16_t pomiary[4];
+  state sensorsState;
+  tof tofs;
+
+
+  pinModes();
   Wire.begin();
-  setID();
+  tofs.setID();
+
+ /*   while(analogRead(VOLTAGE) < MIN_VOLTAGE)
+    {
+      digitalWrite(LED_RED, HIGH);
+      delay(250);
+      digitalWrite(LED_RED, LOW);
+      delay(1000);
+    }
+*/
+    /*while(!(sensorsState.readStarter()))
+    {
+      digitalWrite(LED_BLUE, HIGH);
+      sensorsState.readSwitch();
+    }
+    digitalWrite(LED_BLUE, LOW);*/
 
   for (;;)
   { 
-    readFourSensors(pomiary);
-    sensorsTest(pomiary);
+    /*sensorsState.sensorsStateRead(tofs);
+    sensorsState.distSensorsTest();*/
+    
+
     delay(1);
     ////////////Arduino stuff/////////////
     if (serialEventRun)
