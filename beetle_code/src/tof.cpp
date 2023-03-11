@@ -48,6 +48,7 @@ void tof::setID()
   tofTab[3].init();
   delay(10);
 
+  
 
 #if defined HIGH_SPEED
   // reduce timing budget to 20 ms (default is about 33 ms)
@@ -76,7 +77,7 @@ void tof::readFourSensors(uint16_t *tab)
     {
       tab[i] = this->tofTab[i].readRangeSingleMillimeters();
     }
-    tab[0] = ZERO_DISTANCE;
+    //tab[0] = ZERO_DISTANCE;
 }
 
 
@@ -120,4 +121,28 @@ void tof::tofTest(uint16_t *tab)
       digitalWrite(3,LOW);
     }
 
+}
+
+void tof::setOne()
+{
+  digitalWrite(XSHUT_TOF_1,LOW);
+  digitalWrite(XSHUT_TOF_2,LOW);
+  digitalWrite(XSHUT_TOF_3,LOW);
+  digitalWrite(XSHUT_TOF_4,LOW);
+
+  digitalWrite(XSHUT_TOF_1,LOW);
+  digitalWrite(XSHUT_TOF_2,LOW);
+  digitalWrite(XSHUT_TOF_3,LOW);
+  digitalWrite(XSHUT_TOF_4,HIGH);
+  //this->tofTab[] wszedzie
+  tofTab[3].setTimeout(TIMEOUT_VALUE);
+  tofTab[3].setAddress(TOF_4_ADDRESS);
+  tofTab[3].init();
+  delay(10);
+
+}
+
+uint16_t tof::readOne()
+{
+  return this->tofTab[0].readRangeSingleMillimeters();
 }
