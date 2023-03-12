@@ -1,5 +1,14 @@
 #include "state.h"
 
+
+  
+    #define R_S distTab[0]
+    #define L_S  distTab[1]
+    #define L_F  distTab[2]
+    #define R_F  distTab[3]
+
+    //R_S,L_S,L_F,R_F; // distances PRAWY_BOK, LEWY_BOK, LEWY_PRZOD, PRAWY_PRZOD
+
 state::state()
 {   
     
@@ -12,14 +21,17 @@ state::state()
     for(int i = 0; i < 4; i++)
     {
         this->distTab[i] = ZERO_DISTANCE;
+        this->LastDistTab[i] = ZERO_DISTANCE;
     }
 
     this->starterState = 0;
+    this->distStateHolder = 0;
 }
 
 
-void state::sensorsStateRead(tof tof_sensors)
+void state::sensorsRead(tof tof_sensors)
 {
+    for(int i = 0; i < 4; i++){this->LastDistTab[i] = this->distTab[i];} // zapamietanie poprzednich pomiarów
     readGround();
     tof_sensors.readFourSensors(this->distTab);
     this->starterState = digitalRead(STARTER);
@@ -61,10 +73,57 @@ bool state::readStarter()
 
 }
 
+
+
+void state::distState() //Ustawienie "flagi" z tofow, patrz plik: "dist_State_Cases.png"
+{
+     //R_S,L_S,L_F,R_F; // distances PRAWY_BOK, LEWY_BOK, LEWY_PRZOD, PRAWY_PRZOD
+
+    if(R_S < DIST_BORDER && L_S < DIST_BORDER && L_F < DIST_BORDER && R_F < DIST_BORDER) /*wszedzie this->*/distStateHolder = 10;
+
+    else if(L_F < DIST_BORDER && R_F < DIST_BORDER && R_S < DIST_BORDER) distStateHolder = 9;
+    else if(L_S < DIST_BORDER && L_F < DIST_BORDER && R_F < DIST_BORDER) distStateHolder = 8;
+
+    else if(R_F < DIST_BORDER && R_S < DIST_BORDER ) distStateHolder = 7;
+    else if(L_S < DIST_BORDER && L_F< DIST_BORDER) distStateHolder = 6;
+    
+    else if(R_F < DIST_BORDER && L_F < DIST_BORDER) distStateHolder = 5; //jazda do przodu
+
+    else if(R_S < DIST_BORDER) distStateHolder = 4;
+    else if(R_F < DIST_BORDER) distStateHolder = 3;
+    else if(L_F < DIST_BORDER) distStateHolder = 2;
+    else if(L_S < DIST_BORDER) distStateHolder = 1;
+    else distStateHolder = 0;
+}
+
 void state::distSensorsTest()
 {
+  if(L_F < DIST_BORDER && R_F < DIST_BORDER)
+  {
+    digitalWrite(LED_BLUE,HIGH);
+    digitalWrite(LED_RED,HIGH);
+  }
+  else if(L_F < DIST_BORDER)
+  {
+    digitalWrite(LED_BLUE,HIGH);
+    digitalWrite(LED_RED,LOW);
+  }
+  else if(R_F < DIST_BORDER)
+  {
+    digitalWrite(LED_BLUE,LOW);
+    digitalWrite(LED_RED,HIGH);
+  }
+  else
+  {
+    digitalWrite(LED_BLUE,LOW);
+    digitalWrite(LED_RED,LOW);
+  }
+}
 
-  if(distTab[0] < DIST)
+void state::distSensorsTest2()
+{
+
+  if(R_S < DIST)
     {
       digitalWrite(13,HIGH); //RED
     }
@@ -74,7 +133,7 @@ void state::distSensorsTest()
     }
 
 
-    if(distTab[1] < DIST)
+    if(L_S < DIST)
     {
       digitalWrite(12,HIGH); //BLUE
     }
@@ -83,7 +142,7 @@ void state::distSensorsTest()
       digitalWrite(12,LOW);
     }
 
-    if(distTab[2] < DIST)
+    if(L_F < DIST)
     {
       digitalWrite(11,HIGH); //SERVO_LEFT
     }
@@ -92,7 +151,7 @@ void state::distSensorsTest()
       digitalWrite(11,LOW);
     }
 
-    if(distTab[3] < DIST)
+    if(R_F < DIST)
     {
       digitalWrite(3,HIGH); //SERVO_RIGHT
     }

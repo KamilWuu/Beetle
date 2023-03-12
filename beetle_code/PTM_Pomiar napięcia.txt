@@ -1,0 +1,90 @@
+#include <avr/io.h>
+#include <util/delay.h>
+
+#define LED_RED PB5
+#define LED_BLUE PB4
+
+#define VOLTAGE PC2
+
+//ADC_V:
+#define MAX_VOLTAGE 860 //V_BAT = 8.4V, V_IN = 4.2V  
+#define MID_VOLTAGE 808 //V_BAT = 7.9V, V_IN = 3.95V
+#define MIN_VOLTAGE 767 //V_BAT = 7.5V, V_IN = 3.75V
+
+int main(void)
+{
+  uint16_t pomiar = 0;
+
+  ADCSRA = (1<<ADEN)    //<- uruchomienie przetwornika ADC
+  |(1<<ADPS2)           //<- ustawienie preskalera na 128
+  |(1<<ADPS1)
+  |(1<<ADPS0);
+
+  ADMUX = (1<<REFS0)       //<- wybor trybu napiecia odniesienia dla ADC
+          |(1<< MUX1);      //<- PC2 jako wejscie ADC 0010 //tutaj trzeba ustawic binarnie na 4 bitach, na jakim pinie ADC bedzie INPUT
+
+  DDRB |= (1<<LED_BLUE) | (1<<LED_RED); //piny z ledami jako wyjscie
+
+  for(;;)
+  {
+    ADCSRA |= (1<<ADSC); //<- uruchomienie pojedynczej konwersji
+
+    while(ADCSRA & (1<<ADSC)); // <-czeka na zakończenie konwersji
+
+    pomiar = ADC;
+
+    if(pomiar > MID_VOLTAGE)
+    {
+    
+    PORTB |= (1<<LED_BLUE) | (1<<LED_RED);
+
+    }
+    else if(pomiar  <= MID_VOLTAGE && pomiar > MIN_VOLTAGE)
+    {
+    PORTB &= ~(1<<LED_BLUE);
+    PORTB |= (1<<LED_RED);
+    }
+    else if(pomiar <= MIN_VOLTAGE)
+    {
+    PORTB &= ~(1<<LED_BLUE);
+
+    PORTB |= (1<<LED_RED);
+    _delay_ms(100);
+    PORTB &= ~(1<<LED_RED);
+    _delay_ms(400);
+
+    }
+
+
+  }
+
+}
+
+/*
+#include <arduino.h>
+#define LED1 13
+#define ADCIN A0
+uint16_t pomiar = 0;
+void setup()
+{
+  pinMode(LED1,OUTPUT);
+
+  pinMode(ADCIN, INPUT);
+
+}
+
+void loop()
+{
+
+pomiar = analogRead(ADCIN);
+if(pomiar < 500)
+    {
+      digitalWrite(LED1,HIGH);
+    }
+    else
+    {
+      digitalWrite(LED1,LOW);
+    }
+
+}
+*/

@@ -3,25 +3,25 @@
 
 
 //----LEDS----//
-#define LED_RED 13
-#define LED_BLUE 12
+#define LED_RED 13 //PB5
+#define LED_BLUE 12 //PB4
 
 //----MOTORS----//
-#define MOTOR_LEFT_1 10
-#define MOTOR_LEFT_2 9
+#define MOTOR_LEFT_1 10 //PB2
+#define MOTOR_LEFT_2 9  //PB1
 
-#define MOTOR_RIGHT_1 6
-#define MOTOR_RIGHT_2 5
+#define MOTOR_RIGHT_1 6 //PD6
+#define MOTOR_RIGHT_2 5 //PD5
 
 //----SERVOS----//
-#define SERVO_LEFT 11
-#define SERVO_RIGHT 3
+#define SERVO_LEFT 11 //PB3
+#define SERVO_RIGHT 3 //PD3
 
 //----TOF_XSHUTS----//
-#define XSHUT_TOF_1 8
-#define XSHUT_TOF_2 7
-#define XSHUT_TOF_3 4
-#define XSHUT_TOF_4 2
+#define XSHUT_TOF_1 8 //PB0
+#define XSHUT_TOF_2 7 //PD7
+#define XSHUT_TOF_3 4 //PD4
+#define XSHUT_TOF_4 2 //PD2
 
 //----GROUND_SENSORS----//
 #define GROUND_SENSOR_LEFT A7
@@ -31,14 +31,12 @@
 #define SWITCH_1 A0
 #define SWITCH_2 A1
 
-//----VOLTAGE_MEASUREMENT----//
-#define VOLTAGE A2
-
 //----STARTER----//
 #define STARTER A3
 
-
-
+//----VOLTAGE_MEASUREMENT----//
+#define VOLTAGE A2
 #define MIN_VOLTAGE 780 // x = 7,5 (minimal) * 10/20,,, 1023*x/5 = 770
 
 void pinModes();
+void voltageBlink(uint16_t onT, uint16_t offT);

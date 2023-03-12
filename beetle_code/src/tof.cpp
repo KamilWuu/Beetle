@@ -2,8 +2,9 @@
 
 
 
-void tof::setID()
+void tof::setID() //przepisac na rejestry!
 {
+  
   digitalWrite(XSHUT_TOF_1,LOW);
   digitalWrite(XSHUT_TOF_2,LOW);
   digitalWrite(XSHUT_TOF_3,LOW);
@@ -66,8 +67,6 @@ void tof::setID()
   }
 #endif
 
-
-
 }
 
 
@@ -81,7 +80,13 @@ void tof::readFourSensors(uint16_t *tab)
 }
 
 
-void tof::tofTest(uint16_t *tab)
+
+
+
+
+
+/*
+void tof::tofTest(uint16_t *tab) 
 {
 
   if(tab[0] < DIST)
@@ -123,7 +128,7 @@ void tof::tofTest(uint16_t *tab)
 
 }
 
-void tof::setOne()
+void tof::setOne() 
 {
   digitalWrite(XSHUT_TOF_1,LOW);
   digitalWrite(XSHUT_TOF_2,LOW);
@@ -142,7 +147,8 @@ void tof::setOne()
 
 }
 
-uint16_t tof::readOne()
+uint16_t tof::readOne() 
 {
   return this->tofTab[0].readRangeSingleMillimeters();
 }
+*/

@@ -1,33 +1,32 @@
 #include "setup.h"
 
-void pinModes()
+void pinModes() //trza na rejestry przepisać
 {
-  
-  pinMode(LED_RED,OUTPUT);
-  pinMode(LED_BLUE, OUTPUT);
+  DDRB = 0b00111111;
+  DDRD = 0b11111100;
 
-  pinMode(SERVO_LEFT,OUTPUT);
-  pinMode(SERVO_RIGHT,OUTPUT);
+}
 
-  pinMode(MOTOR_LEFT_1,OUTPUT);
-  pinMode(MOTOR_LEFT_2,OUTPUT);
-  pinMode(MOTOR_RIGHT_1,OUTPUT);
-  pinMode(MOTOR_RIGHT_2,OUTPUT);
+bool VLEDState =HIGH;// initial state of LED // trzeba do wyjebac jakos bo lokalne :/ // te zmienne są do funkcji voltageBlink
+long VrememberTime=0;// this is used by the code
+void voltageBlink(uint16_t onT, uint16_t offT)
+{
 
-  pinMode(XSHUT_TOF_1,OUTPUT);
-  pinMode(XSHUT_TOF_2,OUTPUT);
-  pinMode(XSHUT_TOF_3,OUTPUT);
-  pinMode(XSHUT_TOF_4,OUTPUT);
+  if( VLEDState ==HIGH )
+  {
+      if( (millis()- VrememberTime) >= onT){   
+      VLEDState = LOW;// change the state of LED
+      VrememberTime=millis();// remember Current millis() time
+      }
+  }
+  else
+  {   
+      if( (millis()- VrememberTime) >= offT){     
+      VLEDState =HIGH;// change the state of LED
+      VrememberTime=millis();// remember Current millis() time
+      }
+  }
 
-
-  pinMode(GROUND_SENSOR_LEFT,INPUT);
-  pinMode(GROUND_SENSOR_RIGHT,INPUT);
-
-  pinMode(SWITCH_1, INPUT);
-  pinMode(SWITCH_2, INPUT);
-
-  pinMode(VOLTAGE, INPUT);
-  pinMode(STARTER, INPUT);
-
+  digitalWrite(LED_RED,VLEDState);
 }
 

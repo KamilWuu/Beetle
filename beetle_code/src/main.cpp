@@ -10,6 +10,8 @@
 #define LEFT_PWM_MAX 255
 #define RIGHT_PWM_MAX 255
 
+
+
 int main(void)
 {
   /////////Arduino stuff//////////
@@ -22,50 +24,27 @@ int main(void)
   state sensorsState;
   tof tofs;
   
-
-
   pinModes();
   Wire.begin();
   tofs.setID();
   
-
-  while(analogRead(VOLTAGE) < MIN_VOLTAGE)
-  {
-    digitalWrite(LED_RED, HIGH);
-    delay(250);
-    digitalWrite(LED_RED, LOW);
-    delay(1000);
-  }
-
   while(!(sensorsState.readStarter()))
   {
-    digitalWrite(LED_BLUE, HIGH);
-    sensorsState.readSwitch();
-  }
-  digitalWrite(LED_BLUE, LOW);
-  //serwa w dol
-
-  while(digitalRead(SWITCH_1) == 1)
-  {
-    digitalWrite(LED_BLUE, HIGH);
+    if(analogRead(VOLTAGE) < MIN_VOLTAGE) voltageBlink(250,1000);
+    sensorsState.sensorsRead(tofs);
+    sensorsState.distSensorsTest();
     
+
   }
-  digitalWrite(LED_BLUE, LOW);
   
-
-  //distTab[0] = PRAWY_bok
-  //distTab[1] - lewy bok
-  //distab[2] - lewy przod
-  //disTab[3]  - prawy przod
-
-
-  
+  //rozloz skrzydla
 
   for (;;)
   { 
 
-    sensorsState.sensorsStateRead(tofs);
-    takeDecision(sensorsState);
+    sensorsState.sensorsRead(tofs);
+    
+    makeAMove(sensorsState);
     
 
     ////////////Arduino stuff/////////////

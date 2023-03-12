@@ -1,4 +1,6 @@
+#pragma once
 #include "setup.h"
 #include "state.h"
 
-uint16_t takeDecision(state States);
+void makeAMove(state states);
+bool blackOnGround(state states);

@@ -28,9 +28,9 @@ public:
 
 void setID();
 void readFourSensors(uint16_t *tab);
-void tofTest(uint16_t *tab);
+/*void tofTest(uint16_t *tab);
 uint16_t readOne();
-void setOne();
+void setOne();*/
 };
 
 
