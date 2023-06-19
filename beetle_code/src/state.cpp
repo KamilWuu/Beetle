@@ -35,7 +35,7 @@ void state::sensorsRead(tof tof_sensors)
     readGround();
     tof_sensors.readFourSensors(this->distTab);
     this->starterState = digitalRead(STARTER);
-
+    this->distState();
 }
 
 
@@ -79,15 +79,15 @@ void state::distState() //Ustawienie "flagi" z tofow, patrz plik: "dist_State_Ca
 {
      //R_S,L_S,L_F,R_F; // distances PRAWY_BOK, LEWY_BOK, LEWY_PRZOD, PRAWY_PRZOD
 
-    if(R_S < DIST_BORDER && L_S < DIST_BORDER && L_F < DIST_BORDER && R_F < DIST_BORDER) /*wszedzie this->*/distStateHolder = 10;
-
-    else if(L_F < DIST_BORDER && R_F < DIST_BORDER && R_S < DIST_BORDER) distStateHolder = 9;
-    else if(L_S < DIST_BORDER && L_F < DIST_BORDER && R_F < DIST_BORDER) distStateHolder = 8;
-
-    else if(R_F < DIST_BORDER && R_S < DIST_BORDER ) distStateHolder = 7;
-    else if(L_S < DIST_BORDER && L_F< DIST_BORDER) distStateHolder = 6;
+    //if(R_S < DIST_BORDER && L_S < DIST_BORDER && L_F < DIST_BORDER && R_F < DIST_BORDER) /*wszedzie this->*/distStateHolder = 10;
+//
+    //else if(L_F < DIST_BORDER && R_F < DIST_BORDER && R_S < DIST_BORDER) distStateHolder = 9;
+    //else if(L_S < DIST_BORDER && L_F < DIST_BORDER && R_F < DIST_BORDER) distStateHolder = 8;
+//
+    //else if(R_F < DIST_BORDER && R_S < DIST_BORDER ) distStateHolder = 7;
+    //else if(L_S < DIST_BORDER && L_F< DIST_BORDER) distStateHolder = 6;
     
-    else if(R_F < DIST_BORDER && L_F < DIST_BORDER) distStateHolder = 5; //jazda do przodu
+    /*else*/ if(R_F < DIST_BORDER && L_F < DIST_BORDER) distStateHolder = 5; //jazda do przodu
 
     else if(R_S < DIST_BORDER) distStateHolder = 4;
     else if(R_F < DIST_BORDER) distStateHolder = 3;

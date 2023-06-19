@@ -7,11 +7,11 @@
 #define LED_BLUE 12 //PB4
 
 //----MOTORS----//
-#define MOTOR_LEFT_1 10 //PB2
-#define MOTOR_LEFT_2 9  //PB1
+#define MOTOR_LEFT_FORWARD 10 //PB2
+#define MOTOR_LEFT_BACK 9  //PB1
 
-#define MOTOR_RIGHT_1 6 //PD6
-#define MOTOR_RIGHT_2 5 //PD5
+#define MOTOR_RIGHT_FORWARD 6 //PD6
+#define MOTOR_RIGHT_BACK 5 //PD5
 
 //----SERVOS----//
 #define SERVO_LEFT 11 //PB3

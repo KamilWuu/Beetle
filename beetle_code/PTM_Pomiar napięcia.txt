@@ -23,7 +23,7 @@ int main(void)
   ADMUX = (1<<REFS0)       //<- wybor trybu napiecia odniesienia dla ADC
           |(1<< MUX1);      //<- PC2 jako wejscie ADC 0010 //tutaj trzeba ustawic binarnie na 4 bitach, na jakim pinie ADC bedzie INPUT
 
-  DDRB |= (1<<LED_BLUE) | (1<<LED_RED); //piny z ledami jako wyjscie
+  DDRB |= (1<<LED_BLUE) | (1<<LED_RED); //piny z ledami jako wyjscie 0b00110000;
 
   for(;;)
   {

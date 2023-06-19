@@ -70,13 +70,15 @@ void tof::setID() //przepisac na rejestry!
 }
 
 
-void tof::readFourSensors(uint16_t *tab)
-{
+void tof::readFourSensors(uint16_t *dist)
+{   
     for(int i = 0; i < 4; i++)
     {
-      tab[i] = this->tofTab[i].readRangeSingleMillimeters();
+      
+      dist[i] = this->tofTab[i].readRangeSingleMillimeters(); 
+      
     }
-    //tab[0] = ZERO_DISTANCE;
+dist[0] = ZERO_DISTANCE;
 }
 
 

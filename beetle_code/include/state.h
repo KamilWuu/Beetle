@@ -9,11 +9,13 @@
 class state
 {
     uint16_t distTab[4];    //indeks: 0 = PRAWY_bok, 1 - lewy bok,  2 - lewy przod, 3  - prawy przod
-    uint16_t lastDistTab[4];    //indeks: 0 = PRAWY_bok, 1 - lewy bok,  2 - lewy przod, 3  - prawy przod
+    uint16_t LastDistTab[4];    //indeks: 0 = PRAWY_bok, 1 - lewy bok,  2 - lewy przod, 3  - prawy przod
+    uint16_t timeMeasureDistTab[4]; 
     bool groundTab[2];      //indeks: 0 - PRAWY, 1 -LEWY //bool: 1 = biala linia, 0 = brak bialej linii
     bool switchTab[2];  
     bool starterState;
     uint16_t distStateHolder;   //schowek na flage z tofow, patrz plik: "dist_State_Cases.png"
+    
 public:
     
     
@@ -31,6 +33,8 @@ public:
     void distState();   //Ustawienie "flagi" z tofow, patrz plik: "dist_State_Cases.png"
 
     uint16_t GetD(int index){return distTab[index];};
+    uint16_t GetLD(int index){return LastDistTab[index];};
+
     bool GetG(int index){return groundTab[index];};
     bool GetSW(int index){return groundTab[index];};
     bool GetST(){return starterState;};

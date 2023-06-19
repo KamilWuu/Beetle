@@ -23,17 +23,17 @@
 <layer number="13" name="Route13" color="21" fill="1" visible="no" active="no"/>
 <layer number="14" name="Route14" color="22" fill="1" visible="no" active="no"/>
 <layer number="15" name="Route15" color="23" fill="1" visible="no" active="no"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="yes"/>
 <layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="yes"/>
 <layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
@@ -47,18 +47,18 @@
 <layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
-<layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
+<layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="yes"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
-<layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
+<layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
-<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes"/>
 <layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="yes"/>
 <layer number="88" name="SimResults" color="9" fill="1" visible="no" active="no"/>
 <layer number="89" name="SimProbes" color="9" fill="1" visible="no" active="no"/>
 <layer number="90" name="Modules" color="5" fill="1" visible="no" active="no"/>
@@ -92,17 +92,17 @@
 <wire x1="3.683" y1="7.493" x2="3.683" y2="-2.286" width="0.2" layer="20"/>
 <wire x1="3.683" y1="-2.286" x2="14.986" y2="-2.286" width="0.2" layer="20"/>
 <wire x1="14.986" y1="-2.286" x2="15.24" y2="-2.032" width="0.2" layer="20"/>
-<wire x1="15.24" y1="-2.032" x2="15.24" y2="-1.27" width="0.2" layer="20"/>
+<wire x1="15.24" y1="-2.032" x2="15.24" y2="-1.8288" width="0.2" layer="20"/>
 <wire x1="15.24" y1="0" x2="15.24" y2="6.096" width="0.2" layer="20"/>
 <wire x1="15.24" y1="6.096" x2="15.494" y2="6.35" width="0.2" layer="20"/>
 <wire x1="-18.055" y1="36.6016" x2="16.1842" y2="36.6016" width="0.2" layer="20"/>
 <wire x1="16.1842" y1="36.6016" x2="16.51" y2="36.83" width="0.2" layer="20"/>
 <wire x1="16.51" y1="7.747" x2="16.383" y2="7.62" width="0.2" layer="20"/>
-<wire x1="15.24" y1="-1.27" x2="16.51" y2="-1.27" width="0.2" layer="20"/>
+<wire x1="15.24" y1="-1.8288" x2="16.51" y2="-1.8288" width="0.2" layer="20"/>
 <wire x1="15.24" y1="0" x2="16.51" y2="0" width="0.2" layer="20"/>
 <wire x1="16.637" y1="6.223" x2="16.637" y2="0.127" width="0.2" layer="20"/>
 <wire x1="16.637" y1="0.127" x2="16.51" y2="0" width="0.2" layer="20"/>
-<wire x1="16.51" y1="-1.27" x2="16.51" y2="-2.032" width="0.2" layer="20"/>
+<wire x1="16.51" y1="-1.8288" x2="16.51" y2="-2.032" width="0.2" layer="20"/>
 <wire x1="16.51" y1="-2.032" x2="16.764" y2="-2.286" width="0.2" layer="20"/>
 <text x="0.9794" y="22.9708" size="1.05" layer="26" rot="MR270" align="center">
 KAMIL WINNICKI
@@ -14549,16 +14549,14 @@ FEBRUARY 2023
 <wire x1="16.5862" y1="7.7978" x2="16.5862" y2="7.5946" width="0.2" layer="20"/>
 <wire x1="16.383" y1="7.62" x2="16.4084" y2="7.62" width="0.2" layer="20"/>
 <wire x1="16.4084" y1="7.62" x2="16.5862" y2="7.7978" width="0.2" layer="20"/>
-<wire x1="-5.0546" y1="35.179" x2="-5.0546" y2="34.798" width="0.1524" layer="20"/>
-<wire x1="-5.0546" y1="34.798" x2="-5.0546" y2="11.1506" width="0.1524" layer="20"/>
+<wire x1="-5.0546" y1="35.3822" x2="-5.0546" y2="11.1506" width="0.1524" layer="20"/>
 <wire x1="-5.0546" y1="11.1506" x2="-4.6228" y2="10.7188" width="0.1524" layer="20"/>
 <wire x1="-4.6228" y1="10.7188" x2="-4.572" y2="10.7696" width="0.1524" layer="20"/>
 <wire x1="-4.572" y1="10.7696" x2="-3.5052" y2="10.7696" width="0.1524" layer="20"/>
-<wire x1="-3.5052" y1="10.7696" x2="-3.0734" y2="11.2014" width="0.1524" layer="20"/>
-<wire x1="-3.0734" y1="11.2014" x2="-3.0734" y2="35.052" width="0.1524" layer="20"/>
-<wire x1="-3.0734" y1="35.052" x2="-3.3274" y2="35.306" width="0.1524" layer="20"/>
-<wire x1="-3.3274" y1="35.306" x2="-4.5466" y2="35.306" width="0.1524" layer="20"/>
-<wire x1="-4.5466" y1="35.306" x2="-5.0546" y2="34.798" width="0.1524" layer="20"/>
+<wire x1="-3.5052" y1="10.7696" x2="-2.7432" y2="11.43" width="0.1524" layer="20"/>
+<wire x1="-2.7432" y1="11.43" x2="-2.7432" y2="35.2806" width="0.1524" layer="20"/>
+<wire x1="-2.7432" y1="35.2806" x2="-3.8354" y2="35.3822" width="0.1524" layer="20"/>
+<wire x1="-3.8354" y1="35.3822" x2="-5.0546" y2="35.3822" width="0.1524" layer="20"/>
 <wire x1="-17.4752" y1="28.829" x2="-6.7056" y2="28.829" width="0.1524" layer="20"/>
 <wire x1="-6.7564" y1="29.7688" x2="-6.7818" y2="29.7688" width="0.1524" layer="20"/>
 <wire x1="-6.7818" y1="29.7688" x2="-17.018" y2="29.7688" width="0.1524" layer="20"/>
@@ -14567,6 +14565,7 @@ FEBRUARY 2023
 <wire x1="-17.6784" y1="29.0322" x2="-17.4752" y2="28.829" width="0.1524" layer="20"/>
 <wire x1="-6.7818" y1="29.7688" x2="-6.7056" y2="29.6926" width="0.1524" layer="20"/>
 <wire x1="-6.7056" y1="29.6926" x2="-6.7056" y2="28.829" width="0.1524" layer="20"/>
+<text x="11.9634" y="-1.4224" size="1.016" layer="25">JLCJLCJLCJLC</text>
 </plain>
 <libraries>
 <library name="rcl" urn="urn:adsk.eagle:library:334">
